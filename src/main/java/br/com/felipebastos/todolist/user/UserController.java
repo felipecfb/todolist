@@ -36,5 +36,4 @@ public class UserController {
   public String create(@RequestBody UserModel userModel) {
     return userModel.getName();
   }
-  
 }
