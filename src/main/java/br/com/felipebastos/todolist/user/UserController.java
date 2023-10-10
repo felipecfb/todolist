@@ -1,5 +1,6 @@
 package br.com.felipebastos.todolist.user;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,23 +18,14 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/users")
 public class UserController {
 
-  /**
-   * String (texto)
-   * Integer (int) números inteiros
-   * Double (double) Números 0.0000
-   * Float (float) Número 0.000
-   * char (A C )
-   * Date (data)
-   * void
-  */
-
-  /*
-    * Body
-  */
+  @Autowired
+  private IUserRepository userRepository;
     
   @PostMapping("/")
   @ResponseBody
-  public String create(@RequestBody UserModel userModel) {
-    return userModel.getName();
+  public UserModel create(@RequestBody UserModel userModel) {
+    var userCreated = this.userRepository.save(userModel);
+
+    return userCreated;
   }
 }
